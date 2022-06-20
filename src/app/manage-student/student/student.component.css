@@ -1,0 +1,15 @@
+mat-grid-tile {
+    background: gray;
+ }
+
+.full-width {
+   width:70%;
+ }
+ table {
+   width: 100%;
+ }
+ /* :host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  } */

@@ -1,0 +1,278 @@
+<div >
+  <div fxFlex="50%">
+
+    <form [formGroup]="studentForm" autocomplete="off" novalidate fxLayout="column wrap" 
+      fxLayoutGap="10px" (ngSubmit)="saveStudent(studentForm.value)">
+
+      <!-- <mat-grid-list cols="2" rowHeight="2:1"> -->
+      <div >
+        <!-- <mat-grid-tile > -->
+        <mat-card style="width: 100%; box-shadow: 10px  lightblue;">
+
+          <mat-card>
+            <mat-card-content>
+
+              <mat-card-title>
+                <h3 style="text-align: center;color: blue;">Student Details</h3>
+              </mat-card-title>
+              <!-- First Name -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="First Name" required formControlName="name">
+                    <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+                    <!-- <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <!--End Div  -->
+
+              <!-- Last Name -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Last Name" required formControlName="lastName">
+                    <mat-error *ngIf="hasError('lastName', 'required')">Last Name is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- End Div -->
+
+              <!-- Contact Number -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Contact Number" required formControlName="contactNumber"
+                      maxlength="10">
+                    <mat-error *ngIf="hasError('contactNumber', 'required')">Contact Number is Required</mat-error>
+                    <mat-error *ngIf="hasError('contactNumber', 'pattern')">
+                      Please Enter <strong>Valid</strong> Contact Number
+                    </mat-error>
+                    <mat-error *ngIf="hasError('contactNumber', 'maxlength')"> It should be 10 characters.Can't be
+                      maximum</mat-error>
+                    <mat-error *ngIf="hasError('contactNumber', 'minlength')">It should be 10 characters</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- End Div -->
+
+              <!-- Email -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <input type="email" matInput placeholder="Email" formControlName="email" placeholder="Email "
+                      required>
+                    <mat-error *ngIf="hasError('email', 'required')">Please enter a valid email address</mat-error>
+                    <mat-error *ngIf="hasError('email', 'pattern')">Please enter a <strong>valid</strong> email address
+                    </mat-error>
+                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                    <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- End Div -->
+
+
+              <!-- Parent Name -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Parent Name" formControlName="parentName">
+                    <mat-error *ngIf="hasError('parentName', 'required')">Parent Name is required</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- End Div -->
+
+              <!-- Parent Contact Number -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Parent Conatact Number" formControlName="parentNumber" maxlength="10"
+                      required>
+                    <mat-error *ngIf="hasError('parentNumber', 'required')">Parent Contact Number is Required
+                    </mat-error>
+                    <mat-error *ngIf="hasError('parentNumber', 'pattern')">
+                      Please Enter <strong>Valid</strong> Contact Number
+                    </mat-error>
+                    <mat-error *ngIf="hasError('parentNumber', 'maxlength')"> It should be 10 characters.Can't be
+                      maximum</mat-error>
+                    <mat-error *ngIf="hasError('parentNumber', 'minlength')">It should be 10 characters</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- End Div -->
+
+              <!-- Parent Email -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Parent Email" formControlName="parentEmail">
+                    <mat-error *ngIf="hasError('parentEmail', 'email')">Please enter a <strong>valid</strong> email
+                      address</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- End Div -->
+
+            </mat-card-content>
+
+            <!-- Educational Details -->
+
+            <mat-card-title style="align-items: center">
+              <h3 style="text-align: center;color: blue;">Educational Details</h3>
+              <button type="button" mat-raised-button color="accent" (click)="saveEducationalDetails()">
+                <mat-icon>add</mat-icon>Add
+              </button>
+            </mat-card-title>
+            <div class="row">
+
+
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="ID">
+                  <th mat-header-cell *matHeaderCellDef> Sub No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.$key}}
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Qualification">
+                  <th mat-header-cell *matHeaderCellDef> Qualification </th>
+                  <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="Institute Name">
+                  <th mat-header-cell *matHeaderCellDef> Institute Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.instituteName}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="Started Date">
+                  <th mat-header-cell *matHeaderCellDef> Started Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.startedDate}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="End Date">
+                  <th mat-header-cell *matHeaderCellDef> End Date </th>
+                  <td mat-cell *matCellDef="let element">{{element.endDate}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Grade">
+                  <th mat-header-cell *matHeaderCellDef> Grade </th>
+                  <td mat-cell *matCellDef="let element">{{element.grade}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+
+          </mat-card>
+
+          <br>
+
+          <button mat-raised-button color="primary" [disabled]="!studentForm.valid||active==0" style="margin-left: 500px;">{{buttonText}}</button>
+
+        </mat-card>
+
+
+        <!-- </mat-grid-tile> -->
+
+
+
+
+        <!-- <mat-card-actions>
+          
+           <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button> -->
+        <!-- </mat-card-actions> -->
+
+        <!--     
+        <mat-grid-tile>2</mat-grid-tile> -->
+        <!-- <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile> -->
+        
+        <!-- </mat-grid-list> -->
+
+      </div>
+    </form>
+
+
+    <!-- All Existing Students -->
+  </div>
+
+ 
+  <div fxFlex="50%" style="padding-left: 35px">
+    <mat-card style="width:95%; box-shadow: 10px  lightblue;padding-left: 20px;" >
+      <mat-toolbar>
+        <span class="fill-remaining-space"></span>
+        <span>Existing All Students</span>
+        <span class="fill-remaining-space"></span>
+    </mat-toolbar>
+    <br>
+
+      <table mat-table [dataSource]="dataSources" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Student Id Column -->
+        <ng-container matColumnDef="ID">
+          <th mat-header-cell *matHeaderCellDef> Student Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.studentId}}
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}}</td>
+        </ng-container>
+
+        <!-- Contact Number Column -->
+        <ng-container matColumnDef="Contact Number">
+          <th mat-header-cell *matHeaderCellDef>  Contact Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.contactNumber}} </td>
+        </ng-container>
+
+        <!-- email Column -->
+        <ng-container matColumnDef="Email">
+          <th mat-header-cell *matHeaderCellDef> email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <!--Edit Column -->
+        <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="onDelete(row)"><mat-icon>delete_outline</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="Grade">
+          <th mat-header-cell *matHeaderCellDef> Grade </th>
+          <td mat-cell *matCellDef="let element">{{element.grade}} </td>
+        </ng-container> --> 
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+      </table>
+
+    </mat-card>
+
+ </div>
+
+</div>
+
+
+

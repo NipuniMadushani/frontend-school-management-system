@@ -1,0 +1,89 @@
+<!-- <p>education works!</p> -->
+<div class="container">
+  <mat-toolbar>
+      <span class="fill-remaining-space"></span>
+      <span>Educational Details</span>
+      <span class="fill-remaining-space"></span>
+  </mat-toolbar>
+  <!-- <app-employee></app-employee> -->
+</div>
+
+
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+    <!-- <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile> -->
+        <div class="controles-container">
+          <input type="hidden" formControlName="$key">
+
+          <!-- Qualification -->
+          <div class="row">
+            <div class="col-md-6">
+          <mat-form-field >
+            <input formControlName="qualification" matInput placeholder="Qualification">
+            <mat-error>Qualification is Required.</mat-error>
+            <!-- <mat-error *ngIf="hasError('fullName', 'required')">This field is mandatory.</mat-error> -->
+          </mat-form-field>
+          </div>
+          </div>
+<!-- div -->
+
+<!-- Institute Name -->
+<div class="row">
+  <div class="col-md-6">
+          <mat-form-field>
+            <input formControlName="instituteName" matInput placeholder="Institute Name">
+            <mat-error>Institute Name is Required</mat-error>
+          </mat-form-field>
+          </div>
+          </div>
+<!-- div -->
+
+
+<!-- Started Date -->
+<div class="row">
+  <div class="col-md-6">
+    <mat-form-field>
+      <input formControlName="startedDate" matInput [matDatepicker]="picker" placeholder="Started Date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>Started Date is Required</mat-error>
+    </mat-form-field>
+          </div>
+          </div>
+
+<!-- div -->
+
+<!-- Started Date -->
+<div class="row">
+  <div class="col-md-6">
+    <mat-form-field>
+      <input formControlName="endDate" matInput [matDatepicker]="pickerOne" placeholder="End Date">
+      <mat-datepicker-toggle matSuffix [for]="pickerOne"></mat-datepicker-toggle>
+      <mat-datepicker #pickerOne></mat-datepicker>
+      <mat-error>End Date is Required</mat-error>
+    </mat-form-field>
+          </div>
+          </div>
+
+<!-- div -->
+
+<mat-form-field>
+  <mat-select formControlName="grade" placeholder="Grades">
+    <mat-option>None</mat-option>
+    <ng-container *ngFor="let grade of grades">
+      <mat-option value="{{grade.value}}">{{grade.value}}</mat-option>
+    </ng-container>
+  </mat-select>
+  <mat-error>Grade is Required</mat-error>
+</mat-form-field>
+
+          
+<div class="button-row">
+  <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+  <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+</div>
+        </div>
+      <!-- </mat-grid-tile>
+   
+    </mat-grid-list> -->
+  </form>
